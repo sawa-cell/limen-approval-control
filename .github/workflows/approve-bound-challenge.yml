@@ -1,0 +1,53 @@
+name: LIMEN Bound Production Approval
+
+run-name: ${{ format('{0}|{1}|{2}|{3}', inputs.protocol_version, inputs.operation_code, inputs.nonce, inputs.challenge_sha256) }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      protocol_version:
+        description: Public protocol version from the private challenge
+        required: true
+        type: string
+      operation_code:
+        description: Coarse operation only; no private stage or repository data
+        required: true
+        type: choice
+        options:
+          - approval-rehearsal
+          - worker-secret-recovery
+          - relay-privatization
+          - demo-deployment
+          - demo-rollback
+      nonce:
+        description: Random 256-bit nonce as 64 lowercase hex characters
+        required: true
+        type: string
+      challenge_sha256:
+        description: SHA-256 of the canonical private challenge
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  approval:
+    name: Approve bound challenge
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    environment: limen-production-approval
+    env:
+      PROTOCOL_VERSION: ${{ inputs.protocol_version }}
+      OPERATION_CODE: ${{ inputs.operation_code }}
+      NONCE: ${{ inputs.nonce }}
+      CHALLENGE_SHA256: ${{ inputs.challenge_sha256 }}
+    steps:
+      - name: Validate public request syntax without revealing private data
+        shell: bash
+        run: |
+          set -euo pipefail
+          [[ "$PROTOCOL_VERSION" == "LIMEN_APPROVAL_V1" ]]
+          [[ "$OPERATION_CODE" =~ ^(approval-rehearsal|worker-secret-recovery|relay-privatization|demo-deployment|demo-rollback)$ ]]
+          [[ "$NONCE" =~ ^[a-f0-9]{64}$ ]]
+          [[ "$CHALLENGE_SHA256" =~ ^[a-f0-9]{64}$ ]]

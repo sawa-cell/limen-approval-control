@@ -1,0 +1,34 @@
+{
+  "schema_version": "limen.public-approval-control-policy.v1",
+  "protocol_version": "LIMEN_APPROVAL_V1",
+  "owner": {
+    "login": "sawa-cell",
+    "id": "315051190"
+  },
+  "requester": {
+    "login": "Goocz",
+    "id": "226841374"
+  },
+  "workflow": {
+    "path": ".github/workflows/approve-bound-challenge.yml",
+    "name": "LIMEN Bound Production Approval",
+    "job_name": "Approve bound challenge"
+  },
+  "environment": {
+    "name": "limen-production-approval",
+    "reviewer_login": "sawa-cell",
+    "reviewer_id": "315051190",
+    "reviewer_type": "User",
+    "prevent_self_review": true,
+    "can_admins_bypass": false,
+    "branch": "main"
+  },
+  "review_comment": "APPROVE_BOUND_CHALLENGE_V1",
+  "operations": [
+    "approval-rehearsal",
+    "worker-secret-recovery",
+    "relay-privatization",
+    "demo-deployment",
+    "demo-rollback"
+  ]
+}

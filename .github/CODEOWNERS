@@ -1,0 +1,5 @@
+# The control repository is intentionally frozen behind one independent owner.
+* @sawa-cell
+/.github/CODEOWNERS @sawa-cell
+/.github/workflows/ @sawa-cell
+/control-policy.json @sawa-cell
