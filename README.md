@@ -32,3 +32,7 @@ releases, webhooks, OIDC, deployment credentials, or external integrations.
 This record is an independent attestation only for an unchanged compliant
 private consumer. Any write/admin principal in the private repository can
 bypass that consumer or use its repository-level production credential.
+
+## Protected-main rehearsal
+
+Bootstrap includes a README-only protected-main movement rehearsal before any production credential is enabled.
