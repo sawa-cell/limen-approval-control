@@ -19,6 +19,7 @@ on:
           - relay-privatization
           - demo-deployment
           - demo-rollback
+          - vps-deployment
       nonce:
         description: Random 256-bit nonce as 64 lowercase hex characters
         required: true
@@ -48,6 +49,6 @@ jobs:
         run: |
           set -euo pipefail
           [[ "$PROTOCOL_VERSION" == "LIMEN_APPROVAL_V1" ]]
-          [[ "$OPERATION_CODE" =~ ^(approval-rehearsal|worker-secret-recovery|relay-privatization|demo-deployment|demo-rollback)$ ]]
+          [[ "$OPERATION_CODE" =~ ^(approval-rehearsal|worker-secret-recovery|relay-privatization|demo-deployment|demo-rollback|vps-deployment)$ ]]
           [[ "$NONCE" =~ ^[a-f0-9]{64}$ ]]
           [[ "$CHALLENGE_SHA256" =~ ^[a-f0-9]{64}$ ]]
