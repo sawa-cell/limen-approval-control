@@ -29,6 +29,7 @@
     "worker-secret-recovery",
     "relay-privatization",
     "demo-deployment",
-    "demo-rollback"
+    "demo-rollback",
+    "vps-deployment"
   ]
 }
